@@ -21,14 +21,13 @@ public class FinanceTest {
 
     @Test
     public void buyCurrency(){
-        String expectedResult="49 618,15";
+        String expectedResult = "49 611,29";
         driver.findElement(By.xpath("//li[2]/i/span")).click();
         driver.findElement(By.id("fn_s1")).sendKeys("2000");
-        WebElement rate = driver.findElement(By.xpath(".//*[@id='fn_bank']/option[21]"));
-//        rate.click();
-        Select rateSelect= new Select(rate);
+        Select rateSelect = new Select(driver.findElement(By.id("fn_bank")));
         rateSelect.selectByVisibleText("НБУ");
-        Assert.assertEquals(expectedResult,driver.findElement(By.id("fn_o1_1")).getText());
+        String actualResult = driver.findElement(By.xpath(".//*[@id='fn_o1_1']")).getAttribute("value");
+        Assert.assertEquals(actualResult, expectedResult);
     }
 
     @AfterClass
